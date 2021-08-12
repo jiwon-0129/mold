@@ -1,0 +1,19 @@
+<h2>{{community.title}}</h2>
+<h5>{{community.author}}</h5>
+<h5>{{community.pub_date}}</h5>
+<p>{{community.body}}</p>
+<h5>{{community.hits}}</h5>
+
+{% for reply in community.comments.all %}
+    <div class = "reply">
+        <div class = "date"> {{reply.created_at}}</div>
+        <strong>{{ reply.created_by }} </strong>
+        <p>{{reply.messages}}</p>
+        <br>
+    </div>
+
+{% empty %}
+    <p> 아직 댓글이 작성되지 않았습니다! </p>
+{% endfor %}
+
+<a type="button" href="{% url 'reply' community.id %}">댓글 작성하기</a>

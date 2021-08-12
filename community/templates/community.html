@@ -1,0 +1,20 @@
+{% block content %}
+    <h3> Post </h3>
+    <form method = "POST" class= "post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+       
+    </form>
+{% endblock %}
+
+<hr>
+
+{% for reply in community.reply.all%}
+    <div class = "reply">
+        <div class = "date"> {{reply.created_at}}</div>
+        {{ reply.author_name }}
+        <p> {{ reply.reply_text|linebreakes }} </p>
+    </div>
+{% empty %}
+    <p> 아직 댓글이 작성되지 않았습니다! </p>
+{% endfor %}

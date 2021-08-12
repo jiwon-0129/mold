@@ -1,0 +1,14 @@
+{% if user.is_authenticated %}
+<a href="{% url 'new' %}">새로운 글 작성하기</a>
+{% endif %}
+
+{% block content %}
+{%for community in communitys.all%}
+    <h3>{{ community.title }}</h3>
+    <h4>{{ community.author }}</h4>
+    <p>{{ community.pub_date }}</p>
+    <p>{{ community.summary }}<a href="{% url 'detail' community.id %}">...more</a></p>
+    <p>{{ community.hits }}</p>
+{% endfor %}
+{% endblock %}
+

@@ -1,0 +1,142 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Sans+KR:wght@100;300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        input {
+            text-align: center;
+            height: 30px;
+        }
+
+        #blue {
+            color: #4B73FF
+        }
+
+        #lgray {
+            color: #838383
+        }
+
+        * {
+            font-family: 'Noto Sans', 'Noto Sans KR', sans-serif;
+        }
+
+        .container {
+            display: grid;
+            background-color: rgb(224, 224, 224);
+            row-gap: 10px;
+            grid-template-columns: 1fr 1fr 1fr;
+            padding-bottom: 7px;
+            position: static;
+            margin-left: 10px;
+            margin-right: 0 auto;
+
+        }
+
+        .embracing {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            column-gap: 10px;
+            text-align: center;
+            font-size: 12px;
+
+
+        }
+
+        .item {
+            background-color: rgb(255, 255, 255);
+            border-radius: 5px;
+            width: 300px;
+            margin-top: 10px;
+            margin-right: -10px;
+            height: auto;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div style="display: block; margin-top: 10px;">
+        <ul class="nav justify-content">
+            <img src="{% static 'mold_logo.png' %}" height="36" width="90" alt="몰드 로고"
+                style="margin: 30px; margin-bottom: 15px">
+            <li class="nav-item" style="padding: 22px 22px 0px 610px;">
+                <a class="nav-link" id="lgray" href="{% url 'home' %}">About MOLD</a>
+            </li>
+            <li class="nav-item" style="padding: 22px 22px 0px 22px;">
+                <a class="nav-link" id="blue" href="{% url 'grade' %}">Communication</a>
+            </li>
+            <li class="nav-item" style="padding: 22px 22px 0px 22px;">
+                <a class="nav-link" id="lgray" href="{% url 'communityhome' %}">Community</a>
+            </li>
+            <li class="nav-item" style="padding: 22px 22px 0px 22px;">
+                <a class="nav-link" id="lgray" href="{% url 'mypage' %}" tabindex="-1">My Page</a>
+            </li>
+            <hr width="1200px"
+                style="text-align: center; margin-left: 210px; margin-top: 5px; border: 0.5px solid rgb(0, 0, 0)">
+        </ul>
+    </div>
+    <div style="display: grid; grid-template-columns: 17% 17% 66%; margin-top: 15px;">
+        <div
+            style="padding-top: 35px; background-color: #4B73FF; color: white; height: 100%; border-radius: 0px 15px 0px 0px / 0px 15px 0px 0px">
+            <h6 style="padding-left: 30px; font-weight: 700;">Communication</h6>
+            <br>
+            <ul style="list-style: none; padding-left: none">
+                <li>Add Templates</li><br>
+                <li style="color: #C4C4C4">E-mail</li><br>
+                <li style="color: #C4C4C4">Kakaotalk / Message</li>
+            </ul>
+        </div>
+        <div
+            style="padding-left: 5px; padding-top: 35px; background-color: #F8F8F9; height: 100%; border-radius: 15px 15px 0px 0px / 15px 15px 0px 0px">
+            <h6 style="padding-left: 16px; font-weight: 700; color: #323232">Progress</h6>
+            <p style="padding: 25px 0px 4px 16px; font-size: 14px; color: #323232">Email 바로가기</p>
+            <ul class="list-group" style="padding: 0px 13px; font-size: 14px">
+                <li class="list-group-item"><a class="nav-link" id="lgray"
+                        href="https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com">Naver</a>
+                </li>
+                <li class="list-group-item" style="background-color: #4B73FF; color: white;"><a class="nav-link"
+                        id="lgray"
+                        href="https://accounts.google.com/ServiceLogin/signinchooser?hl=ko&passive=true&continue=https%3A%2F%2Fwww.google.com%2F&ec=GAZAmgQ&flowName=GlifWebSignIn&flowEntry=ServiceLogin">Google</a>
+                </li>
+                <li class="list-group-item"><a class="nav-link" id="lgray"
+                        href="https://logins.daum.net/accounts/signinform.do?url=https%3A%2F%2Fwww.daum.net%2F">Daum</a>
+                </li>
+            </ul>
+        </div>
+        <div>{% for template in templates.all %}
+            <div class="embracing">
+                <div class="container">
+                    <div class="item">
+                        {% if template.intro %}
+                        <p>{{template.intro}}</p>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="container">
+                    {% if template.contents %}
+                    <div class="item">
+                        <p>{{template.contents}}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="container">
+                    {% if template.closing %}
+                    <div class="item">
+                        <p>{{template.closing}}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+    </div>

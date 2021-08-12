@@ -1,0 +1,8 @@
+{% block content %}
+    <h3> New Reply </h3>
+    <form method = "POST" class= "post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type = "submit" class = "save btn btn-default">댓글 등록하기</button>
+    </form>
+{% endblock %}

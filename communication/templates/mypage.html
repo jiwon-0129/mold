@@ -1,0 +1,111 @@
+{% load static %}
+<!doctype html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
+        <style>
+            input {
+                text-align: center; 
+                height: 30px;
+            }
+            #blue {
+                color: #4B73FF
+            }
+            #lgray {
+                color: #838383
+            }
+            * {
+                font-family: 'Noto Sans', 'Noto Sans KR', sans-serif;
+            }
+            .container{
+                display: grid;
+                background-color: rgb(212, 195, 195);
+                row-gap: 100px;
+                grid-template-columns: 1fr 1fr 1fr;
+                padding-bottom: 7px;
+                position: static;
+            }
+            .embracing{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                column-gap: 10px;
+                row-gap: 10px;
+              
+            }
+            .item{
+                background-color: cornsilk;
+                margin-right: 30px;
+                border-radius: 5px;
+                width: 250px;
+                height: auto;
+            }
+            .wrap
+           {
+               width: 1000px;
+              
+               border-radius: 15px 15px 15px 15px;
+               border-width: 2px;
+               border-style: solid;
+               border-color: #838383;
+               font-size: 12px;
+               margin-bottom: 10px;
+
+           }
+        </style>
+    </head>
+    <div>
+    <div>
+        <div style="display: block; margin-top: 10px;">
+            <ul class="nav justify-content">
+                <img src="{% static 'mold_logo.png' %}" height="36" width="90" alt="몰드 로고" style="margin: 30px; margin-bottom: 15px">
+                <li class="nav-item" style="padding: 22px 22px 0px 610px;">
+                    <a class="nav-link" id="lgray" href="{% url 'home' %}">About MOLD</a>
+                </li>
+                <li class="nav-item" style="padding: 22px 22px 0px 22px;">
+                    <a class="nav-link" id="lgray" href="{% url 'grade' %}">Communication</a>
+                </li>
+                <li class="nav-item" style="padding: 22px 22px 0px 22px;">
+                    <a class="nav-link" id="lgray" href="{% url 'communityhome' %}">Community</a>
+                </li>
+                <li class="nav-item" style="padding: 22px 22px 0px 22px;">
+                    <a class="nav-link" id="blue" href="{% url 'mypage' %}" tabindex="-1">My Page</a>
+                </li>
+                <hr width="1200px" style="text-align: center; margin-left: 210px; margin-top: 5px; border: 0.5px solid rgb(0, 0, 0)">
+            </ul>
+        </div>
+        <div style="display: grid; grid-template-columns: 20% 5% 66%; margin-top: 15px;">
+            <div style="margin-left: 60px; padding-bottom: 20px; padding-top: 35px; background-color: #dadada;height: 80vh;">
+                <div style="margin-right:11px; margin-left:11px; padding-top: 10px; height:250px; background-color: rgb(255, 255, 255); color: black;">{{customuser.nickname}}</div>
+            </div>
+            <div style="margin: 20px 29px 0px 25px; font-size: 14px;"></div>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" id="lgray" href="{% url 'article' %}" >작성한 메일</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="lgray" href="{% url 'write' %}">작성한 글</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" id="blue" href="{% url 'mypage' %}">댓글단 글</a></li>
+                        <div class="wrap">
+                            
+                            <div>
+                                {% for reply in community.comments.all %}
+                                    {% if user.is_authenticated and user == reply.created_by %}
+                                    {%for community in communitys.all %}
+                                    <div><h2>{{community.title}}</h2></div>
+                                    <div><h5>{{community.pub_date}}</h5></div>
+                                    {% endfor %}
+                                {{reply.messages}}
+                                    {% endif %}
+                                    {% empty %}
+                                <p> 아직 작성한 댓글이 없습니다! </p>
+                                {% endfor %}
+                            </div>
+                            </div>
+                    
+                </ul></div>
+                

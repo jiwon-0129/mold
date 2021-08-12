@@ -1,0 +1,12 @@
+<form action="{% url 'createmeeting' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">저장하기</button><br><br>
+    <input id="title" type="text" value=""> 면담 요청 드립니다<br><br>
+    안녕하세요, 교수님 <input id="sending" type="text" value=""> 입니다.<br>
+    <input id="background" type="text" value=""> <br>
+    교수님께서 가능하시다면 <input id="time" type="text" value=""> 정도 교수님 연구실에 방문하여 이야기 나눠볼 수 있을까요?<br>
+    교수님께서 면담 가능한 시간을 말씀해주시면 그 때 찾아뵙도록 하겠습니다.
+    <br><br>
+    항상 건강 유의하시고, 행복한 하루 되시길 바랍니다. 감사합니다.<br>
+    <input id="name" type="text" value=""> 올림    
+</form>
